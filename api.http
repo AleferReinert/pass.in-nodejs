@@ -1,0 +1,23 @@
+POST http://localhost:3333/events
+Content-Type: application/json
+
+{
+    "title": "Novo evento 2",
+    "details": null,
+    "maximumAttendees": 1
+}
+
+###
+POST http://localhost:3333/events/e9c1a221-4f38-402e-9449-6bd48b117cb2/attendees
+Content-Type: application/json
+
+{
+    "name": "Mike Portnoy",
+    "email": "portnoy.mike2@gmail.com"
+}
+
+###
+GET http://localhost:3333/events/f68b05bd-e5f3-4627-bf85-70eb9cc2eda6
+
+###
+GET http://localhost:3333/attendees/2/badge
