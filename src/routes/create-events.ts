@@ -3,21 +3,26 @@ import { generateSlug } from '.././utils/generate-slug'
 import { prisma } from '../lib/prisma';
 import { z } from 'zod'
 import { ZodTypeProvider } from 'fastify-type-provider-zod';
+import { BadRequest } from './_errors/bad-request';
 
 export async function createEvent(app: FastifyInstance) {
     app.withTypeProvider<ZodTypeProvider>()
-    .post('/events', {schema: {
-        body: z.object({
-            title: z.string().min(4),
-            details: z.string().nullable(),
-            maximumAttendees: z.number().int().positive().nullable()
-        }),
-        response: {
-            201: z.object({
-                eventId: z.string().uuid()
-            })
+    .post('/events', {
+        schema: {
+            summary: 'Cria um evento',
+            tags: ['eventos'],
+            body: z.object({
+                title: z.string().min(4),
+                details: z.string().nullable(),
+                maximumAttendees: z.number().int().positive().nullable()
+            }),
+            response: {
+                201: z.object({
+                    eventId: z.string().uuid()
+                })
+            }
         }
-    }}, async (request, reply) => {
+    }, async (request, reply) => {
 
         const {
             title,
@@ -34,7 +39,7 @@ export async function createEvent(app: FastifyInstance) {
         })
 
         if(eventWithSameSlug !== null) {
-            throw new Error('Another event with same title already exists.')
+            throw new BadRequest('Another event with same title already exists.')
         }
 
         const event = await prisma.event.create({
@@ -46,7 +51,6 @@ export async function createEvent(app: FastifyInstance) {
             }
         })
 
-        console.log(request.body)
         return reply.status(201).send({eventId: event.id})
     })
 }
