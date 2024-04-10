@@ -1,4 +1,4 @@
-POST http://localhost:3333/events
+POST https://pass-in-nodejs.vercel.app/events
 Content-Type: application/json
 
 {
@@ -8,22 +8,22 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3333/events/7f968e71-187e-469e-95b1-dc861048194d/attendees
+POST https://pass-in-nodejs.vercel.app/events/7f968e71-187e-469e-95b1-dc861048194d/attendees
 Content-Type: application/json
 
 {
-    "name": "Mike Portnoy",
-    "email": "portnoy.mike@gmail.com"
+    "name": "Amilcar Christófaro",
+    "email": "amilcar@torturesquad.com"
 }
 
 ###
-GET http://localhost:3333/events/7f968e71-187e-469e-95b1-dc861048194d
+GET https://pass-in-nodejs.vercel.app/events/7f968e71-187e-469e-95b1-dc861048194d
 
 ###
-GET http://localhost:3333/attendees/1/badge
+GET https://pass-in-nodejs.vercel.app/attendees/1/badge
 
 ###
-GET http://localhost:3333/attendees/1/check-in
+GET https://pass-in-nodejs.vercel.app/attendees/5/check-in
 
 ###
-GET http://localhost:3333/events/7f968e71-187e-469e-95b1-dc861048194d/attendees
+GET https://pass-in-nodejs.vercel.app/events/7f968e71-187e-469e-95b1-dc861048194d/attendees

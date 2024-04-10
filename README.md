@@ -9,3 +9,6 @@ O NLW é uma iniciativa da [Rocketseat](https://github.com/Rocketseat).
 [Material complementar](https://efficient-sloth-d85.notion.site/Node-js-a51a784e58e8482daa4c188b1659f5df)
 
 Documentação: [http://localhost:3333/docs](http://localhost:3333/docs)
+
+## Deploy
+Projeto hospedado na [Vercel](https://vercel.com/) e banco de dados na [Neon](https://console.neon.tech).
