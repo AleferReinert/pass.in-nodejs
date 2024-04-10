@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify'
-import { generateSlug } from '.././utils/generate-slug'
+import { generateSlug } from '../utils/generate-slug'
 import { prisma } from '../lib/prisma';
 import { z } from 'zod'
 import { ZodTypeProvider } from 'fastify-type-provider-zod';

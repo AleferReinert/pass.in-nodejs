@@ -2,9 +2,9 @@ POST http://localhost:3333/events
 Content-Type: application/json
 
 {
-    "title": 1,
-    "details": null,
-    "maximumAttendees": 5
+    "title": "NLW Unite",
+    "details": "15ª edição do NLW da Rocketseat.",
+    "maximumAttendees": 2
 }
 
 ###
@@ -13,7 +13,7 @@ Content-Type: application/json
 
 {
     "name": "Mike Portnoy",
-    "email": "portnoy.mike2@gmail.com"
+    "email": "portnoy.mike@gmail.com"
 }
 
 ###
