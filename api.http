@@ -4,7 +4,7 @@ Content-Type: application/json
 {
     "title": "NLW Unite",
     "details": "15ª edição do NLW da Rocketseat.",
-    "maximumAttendees": 2
+    "maximumAttendees": 20
 }
 
 ###
