@@ -12,8 +12,8 @@ POST https://pass-in-nodejs.vercel.app/events/7f968e71-187e-469e-95b1-dc86104819
 Content-Type: application/json
 
 {
-    "name": "Amilcar Christófaro",
-    "email": "amilcar@torturesquad.com"
+    "name": "Dave Lombardo",
+    "email": "davelombardo@gmail.com"
 }
 
 ###
