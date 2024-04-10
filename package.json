@@ -10,7 +10,7 @@
     "dev": "tsx watch --env-file .env src/server.ts",
     "postinstall": "prisma generate",
     "build": "tsup src --format esm",
-    "vercel-build": "prisma migrate deploy",
+    "vercel-build": "prisma generate && prisma migrate deploy",
     "start": "node dist/server.mjs",
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio"
