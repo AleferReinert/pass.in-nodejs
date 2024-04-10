@@ -8,8 +8,7 @@
   },
   "scripts": {
     "dev": "tsx watch --env-file .env src/server.ts",
-    "build": "tsup src --format esm",
-    "vercel-build": "prisma generate && prisma migrate deploy",
+    "build": "tsup src --format esm && prisma generate && prisma migrate deploy",
     "start": "node dist/server.mjs",
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio"
@@ -22,6 +21,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.12.3",
+    "@vercel/node": "^3.0.26",
     "prisma": "^5.12.1",
     "tsup": "^8.0.2",
     "tsx": "^4.7.1",
