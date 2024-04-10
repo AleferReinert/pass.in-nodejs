@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "tsx watch --env-file .env src/server.ts",
+    "postinstall": "prisma generate",
     "build": "tsup src --format esm",
     "vercel-build": "prisma migrate deploy",
     "start": "node dist/server.mjs",
