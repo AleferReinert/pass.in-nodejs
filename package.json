@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch --env-file .env src/server.ts",
-    "build": "tsup src --format esm",
+    "build": "prisma generate && tsup src --format esm",
     "vercel-build": "npx prisma migrate deploy",
+    "postinstall": "prisma generate",
     "start": "node dist/server.mjs",
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio"
