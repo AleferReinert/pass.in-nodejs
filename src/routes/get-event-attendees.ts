@@ -54,8 +54,8 @@ export async function getEventAttendees(app: FastifyInstance) {
             } : {
                 eventId
             },
-            take: 10, // Quantidade de registros para retornar
-            skip: pageIndex * 10,
+            // take: 5, // Quantidade de registros para retornar
+            // skip: pageIndex * 10,
             orderBy: {
                 createdAt: 'desc'
             }
