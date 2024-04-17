@@ -10,6 +10,7 @@ import { getAttendeBadge } from './routes/get-attendee-badge';
 import { checkIn } from './routes/check-in';
 import { getEventAttendees } from './routes/get-event-attendees';
 import { errorHandler } from './error-handler';
+import { getEvents } from './routes/get-events';
 
 const app = fastify()
 
@@ -38,6 +39,7 @@ app.register(fastifySwaggerUi, {
 })
 app.register(createEvent)
 app.register(getEvent)
+app.register(getEvents)
 app.register(registerForEvent)
 app.register(getAttendeBadge)
 app.register(checkIn)
