@@ -10,6 +10,9 @@ export async function getEvents(app: FastifyInstance) {
         schema: {
             summary: 'Retorna todos eventos',
             tags: ['eventos'],
+            querystring: z.object({
+                query: z.string().nullish()
+            }),
             response: {
                 200: z.object({
                     events: z.array(
@@ -25,6 +28,7 @@ export async function getEvents(app: FastifyInstance) {
             }
         }
      }, async (request, reply) => {
+        const { query } = request.query
         const events = await prisma.event.findMany({
             // Retorna apenas os seguintes campos
             select: {
@@ -33,6 +37,15 @@ export async function getEvents(app: FastifyInstance) {
                 slug: true,
                 details: true,
                 maximumAttendees: true
+            },
+            where: query ? {
+                title: {
+                    mode: 'insensitive',
+                    contains: query
+                }
+            } : {},
+            orderBy: {
+                title: 'desc'
             }
         })
 
