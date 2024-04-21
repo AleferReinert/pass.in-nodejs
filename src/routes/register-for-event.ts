@@ -19,7 +19,7 @@ export async function registerForEvent(app: FastifyInstance) {
             }),
             response: {
                 201: z.object({
-                    attendeeId: z.number().positive().gte(4)
+                    attendeeId: z.number().positive().min(4)
                 })
             }
         }
