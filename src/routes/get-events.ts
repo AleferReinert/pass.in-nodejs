@@ -21,8 +21,7 @@ export async function getEvents(app: FastifyInstance) {
                             title: z.string(),
                             slug: z.string(),
                             details: z.string().nullable(),
-                            maximumAttendees: z.number().int().nullable(),
-                            attendeesAmount: z.number().int()
+                            maximumAttendees: z.number().int().nullable()
                         })
                     )
                 })
@@ -39,7 +38,6 @@ export async function getEvents(app: FastifyInstance) {
                 slug: true,
                 details: true,
                 maximumAttendees: true,
-                attendeesAmount: true,
                 _count: {
                     select: { attendees: true }
                 }
