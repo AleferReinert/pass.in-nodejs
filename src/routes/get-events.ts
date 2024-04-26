@@ -35,7 +35,7 @@ export async function getEvents(app: FastifyInstance) {
                 id: true,
                 title: true,
                 slug: true,
-                details: true,
+                details: true
             },
             where: query ? {
                 title: {
