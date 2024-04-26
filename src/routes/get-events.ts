@@ -21,7 +21,8 @@ export async function getEvents(app: FastifyInstance) {
                             title: z.string(),
                             slug: z.string(),
                             details: z.string().nullable(),
-                            maximumAttendees: z.number().int().nullable()
+                            maximumAttendees: z.number().int().nullable(),
+                            attendeesAmount: z.number().int()
                         })
                     )
                 })
@@ -38,8 +39,12 @@ export async function getEvents(app: FastifyInstance) {
                 slug: true,
                 details: true,
                 maximumAttendees: true,
+                attendeesAmount: true,
+                attendees: true,
                 _count: {
-                    select: { attendees: true }
+                    select: { 
+                        attendees: true
+                    }
                 }
             },
             where: query ? {
@@ -56,6 +61,15 @@ export async function getEvents(app: FastifyInstance) {
         if(events === null) {
             throw new BadRequest("Events not found")
         }
+
+        // Post-processing to add participant count based on event id
+        events.forEach((event) => {
+            event.attendeesAmount = event._count.attendees
+            
+            event.attendeesAmount = event.attendees.filter(
+                (attendees) => attendees.eventId === event.id 
+            ).length
+        })
 
         return reply.send({ 
             events: events.map(event => {
