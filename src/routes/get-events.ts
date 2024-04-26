@@ -20,9 +20,7 @@ export async function getEvents(app: FastifyInstance) {
                             id: z.string().uuid(),
                             title: z.string(),
                             slug: z.string(),
-                            details: z.string().nullable(),
-                            maximumAttendees: z.number().int().nullable(),
-                            attendeesAmount: z.number().int()
+                            details: z.string().nullable()
                         })
                     )
                 })
@@ -38,14 +36,6 @@ export async function getEvents(app: FastifyInstance) {
                 title: true,
                 slug: true,
                 details: true,
-                maximumAttendees: true,
-                attendeesAmount: true,
-                attendees: true,
-                _count: {
-                    select: { 
-                        attendees: true
-                    }
-                }
             },
             where: query ? {
                 title: {
@@ -62,24 +52,13 @@ export async function getEvents(app: FastifyInstance) {
             throw new BadRequest("Events not found")
         }
 
-        // Post-processing to add participant count based on event id
-        events.forEach((event) => {
-            event.attendeesAmount = event._count.attendees
-            
-            event.attendeesAmount = event.attendees.filter(
-                (attendees) => attendees.eventId === event.id 
-            ).length
-        })
-
         return reply.send({ 
             events: events.map(event => {
                 return {
                     id: event.id,
                     title: event.title,
                     details: event.details,
-                    slug: event.slug,
-                    maximumAttendees: event.maximumAttendees,
-                    attendeesAmount: event._count.attendees
+                    slug: event.slug
                 }
             })
          })

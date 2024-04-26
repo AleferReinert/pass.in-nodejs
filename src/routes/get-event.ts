@@ -20,8 +20,7 @@ export async function getEvent(app: FastifyInstance) {
                         title: z.string(),
                         slug: z.string(),
                         details: z.string().nullable(),
-                        maximumAttendees: z.number().int().nullable(),
-                        attendeesAmount: z.number().int()
+                        maximumAttendees: z.number().int().nullable()
                     })
                 })
             }
@@ -35,8 +34,7 @@ export async function getEvent(app: FastifyInstance) {
                 title: true,
                 slug: true,
                 details: true,
-                maximumAttendees: true,
-                attendeesAmount: true
+                maximumAttendees: true
             },
             where: {
                 id: eventId
@@ -47,16 +45,6 @@ export async function getEvent(app: FastifyInstance) {
             throw new BadRequest("Event not found")
         }
 
-        // Conta participantes registrados no evento
-        const attendeesAmount = await prisma.attendee.count({
-            where: {
-                eventId
-            }
-        })
-
-        // Add participant count to the event object
-        event.attendeesAmount = attendeesAmount
-
         return reply.send({ 
 
             // Renomeia as chaves
@@ -65,8 +53,7 @@ export async function getEvent(app: FastifyInstance) {
                 title: event.title,
                 slug: event.slug,
                 details: event.details,
-                maximumAttendees: event.maximumAttendees,
-                attendeesAmount: event.attendeesAmount
+                maximumAttendees: event.maximumAttendees
             }
          })
      })
