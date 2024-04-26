@@ -8,7 +8,7 @@ export async function getEvents(app: FastifyInstance) {
      app.withTypeProvider<ZodTypeProvider>()
      .get('/events', {
         schema: {
-            summary: 'Retorna todos eventos',
+            summary: 'Retorna todos os eventos',
             tags: ['eventos'],
             querystring: z.object({
                 query: z.string().nullish()
@@ -22,6 +22,7 @@ export async function getEvents(app: FastifyInstance) {
                             slug: z.string(),
                             details: z.string().nullable(),
                             maximumAttendees: z.number().int().nullable(),
+                            attendeesAmount: z.number().int()
                         })
                     )
                 })
@@ -29,6 +30,7 @@ export async function getEvents(app: FastifyInstance) {
         }
      }, async (request, reply) => {
         const { query } = request.query
+
         const events = await prisma.event.findMany({
             // Retorna apenas os seguintes campos
             select: {
@@ -36,7 +38,11 @@ export async function getEvents(app: FastifyInstance) {
                 title: true,
                 slug: true,
                 details: true,
-                maximumAttendees: true
+                maximumAttendees: true,
+                attendeesAmount: true,
+                _count: {
+                    select: { attendees: true }
+                }
             },
             where: query ? {
                 title: {
@@ -60,7 +66,8 @@ export async function getEvents(app: FastifyInstance) {
                     title: event.title,
                     details: event.details,
                     slug: event.slug,
-                    maximumAttendees: event.maximumAttendees
+                    maximumAttendees: event.maximumAttendees,
+                    attendeesAmount: event._count.attendees
                 }
             })
          })
