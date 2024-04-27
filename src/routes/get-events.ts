@@ -20,7 +20,8 @@ export async function getEvents(app: FastifyInstance) {
                             id: z.string().uuid(),
                             title: z.string(),
                             slug: z.string(),
-                            details: z.string().nullable()
+                            details: z.string().nullable(),
+                            maximumAttendees: z.number().int().nullable()
                         })
                     )
                 })
@@ -35,7 +36,8 @@ export async function getEvents(app: FastifyInstance) {
                 id: true,
                 title: true,
                 slug: true,
-                details: true
+                details: true,
+                maximumAttendees: true
             },
             where: query ? {
                 title: {
@@ -58,7 +60,8 @@ export async function getEvents(app: FastifyInstance) {
                     id: event.id,
                     title: event.title,
                     details: event.details,
-                    slug: event.slug
+                    slug: event.slug,
+                    maximumAttendees: event.maximumAttendees
                 }
             })
          })

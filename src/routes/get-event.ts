@@ -38,7 +38,7 @@ export async function getEvent(app: FastifyInstance) {
                 maximumAttendees: true,
                 _count: {
                     select: {
-                    attendees: true,
+                        attendees: true,
                     }
                 }
             },
