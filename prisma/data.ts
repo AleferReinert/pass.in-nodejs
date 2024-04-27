@@ -1,11 +1,15 @@
 import { faker } from '@faker-js/faker'
 
 // Esse arquivo gera dados fictícios para popular o banco de dados.
-
-interface Attendee {
+interface AttendeeProps {
+    id: number
     name: string
     email: string
     eventId: string
+}
+
+interface CheckInProps {
+    attendeeId: number
 }
 
 // Eventos
@@ -22,7 +26,7 @@ const eventReactathon = {
     title: 'Reactathon',
     slug: 'reactathon',
     details: 'Hackathon de 24h para criar projetos inovadores com React.js.',
-    maximumAttendees: 50
+    maximumAttendees: 100
 }
 
 const eventWorkshopVueJs = {
@@ -30,37 +34,41 @@ const eventWorkshopVueJs = {
     title: 'Workshop Vue.js',
     slug: 'workshop-vue-js',
     details: 'Domine interfaces dinâmicas com Vue.js neste workshop prático.',
-    maximumAttendees: 80
+    maximumAttendees: 100
 }
 
-// Exporta os dados
 export const allEvents = [eventNlwUnite, eventReactathon, eventWorkshopVueJs]
-export const allAttendees: Attendee[] = []
 
-// Participantes de cada evento
-for (let i = 0; i < 45; i++) {
+
+// Participantes
+export const allAttendees: AttendeeProps[] = []
+
+// Escolhe um evento aleatório para registrar o participante
+function randomEventId() {
+  const eventIds = [eventNlwUnite.id, eventReactathon.id, eventWorkshopVueJs.id]
+  const randomIndex = Math.floor(Math.random() * eventIds.length)
+
+  return eventIds[randomIndex]
+}
+
+for (let i = 1; i <= 228; i++) {
     const attendee = {
+        id: i,
         name: faker.person.fullName(),
         email: faker.internet.email(),
-        eventId: eventNlwUnite.id
+        eventId: randomEventId()
     }
     allAttendees.push(attendee);
 }
 
-for (let i = 0; i < 10; i++) {
-    const attendee = {
-        name: faker.person.fullName(),
-        email: faker.internet.email(),
-        eventId: eventReactathon.id
-    }
-    allAttendees.push(attendee);
-}
+// Check-ins aleatórios
+export const allCheckIns: CheckInProps[] = []
 
-for (let i = 0; i < 18; i++) {
-    const attendee = {
-        name: faker.person.fullName(),
-        email: faker.internet.email(),
-        eventId: eventWorkshopVueJs.id
+for (let i = 0; i < allAttendees.length; i++) {
+    const randomBoolean = faker.datatype.boolean()
+    const id = allAttendees[i].id
+    
+    if(randomBoolean) {
+        allCheckIns.push({attendeeId: id})
     }
-    allAttendees.push(attendee);
 }

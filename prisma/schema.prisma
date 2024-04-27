@@ -15,6 +15,7 @@ model Event {
     title            String
     details          String?
     slug             String     @unique
+    attendeeAmount   Int?       @map("attendee_amount")
     attendeesAmount  Int?       @map("attendees_amount")
     maximumAttendees Int?       @map("maximum_attendees")
     attendees        Attendee[]

@@ -1,4 +1,4 @@
-# Cria um evento
+### Cria um evento
 POST https://pass-in-nodejs.vercel.app/events
 Content-Type: application/json
 
@@ -8,7 +8,13 @@ Content-Type: application/json
     "maximumAttendees": 20
 }
 
-# Registra um participante no evento
+### Retorna um evento (passar ID)
+GET https://pass-in-nodejs.vercel.app/events/bb4f1c2b-33ea-4053-8818-ca4ab69114de
+
+### Retorna todos os eventos
+GET https://pass-in-nodejs.vercel.app/events
+
+### Registra um participante no evento (passar ID)
 POST https://pass-in-nodejs.vercel.app/events/7f968e71-187e-469e-95b1-dc861048194d/attendees
 Content-Type: application/json
 
@@ -17,17 +23,11 @@ Content-Type: application/json
     "email": "bruno-graveto@gmail.com"
 }
 
-# Retorna um evento
-GET https://pass-in-nodejs.vercel.app/events/7f968e71-187e-469e-95b1-dc861048194d
+### Retorna todos os participantes de um evento (passar ID)
+GET https://pass-in-nodejs.vercel.app/events/bb4f1c2b-33ea-4053-8818-ca4ab69114de/attendees
 
-# Retorna a credencial de um participante 
+### Realiza check-in do participante
+GET https://pass-in-nodejs.vercel.app/attendees/1/check-in
+
+### Retorna a credencial de um participante 
 GET https://pass-in-nodejs.vercel.app/attendees/1/badge
-
-# Faz check-in do participante
-GET https://pass-in-nodejs.vercel.app/attendees/5/check-in
-
-# Retorna todos participantes de um evento
-GET https://pass-in-nodejs.vercel.app/events/7f968e71-187e-469e-95b1-dc861048194d/attendees
-
-# Retorna todos os eventos
-GET https://pass-in-nodejs.vercel.app/events

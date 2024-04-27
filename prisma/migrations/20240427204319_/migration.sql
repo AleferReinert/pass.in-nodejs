@@ -4,6 +4,8 @@ CREATE TABLE "events" (
     "title" TEXT NOT NULL,
     "details" TEXT,
     "slug" TEXT NOT NULL,
+    "attendee_amount" INTEGER,
+    "attendees_amount" INTEGER,
     "maximum_attendees" INTEGER,
 
     CONSTRAINT "events_pkey" PRIMARY KEY ("id")
